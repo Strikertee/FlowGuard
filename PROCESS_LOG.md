@@ -302,6 +302,21 @@
 
 ---
 
+## 2026-10-09T00:00:00Z — Phase 21: Review of pulled updates (render + UI fixes)
+
+- Objective: User pulled 4 collaborator commits; reviewed each.
+- Findings: e132e1b (readable API error messages incl. validation arrays — real fix, UI showed
+  "[object Object]") and 57abb34 (string amount inputs + validation — real UX fix) are good and
+  contract-safe; top-up UI cap (100,000) matches backend le=100_000. Two rejections: 456e9c0 dropped the
+  managed Postgres for SQLite — violates PRD §17/§18 + acceptance criterion 11, so restored the database
+  + fromDatabase wiring while keeping their render.yaml improvements (healthCheckPath, NODE_VERSION,
+  fromService auto-wiring, plan-note, SPA rewrite); ad96b54 re-committed backend/flowguard.db — untracked
+  again (live data preserved, still ignored).
+- Commands: `pytest -q` → 15 passed; `npm run typecheck` → pass (machine RAM recovered enough).
+- Remaining: push + Render deploy + smoke test.
+
+---
+
 ## 2026-10-08T03:50:00Z — Phase 20: Scenario evidence panel (judge-ready signals)
 
 - Objective: User feedback — UI showed classifications without the evidence behind them. Added a signal panel
